@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AntiPsychRRMVC.Data;
 using AntiPsychRRMVC2.Models;
+using AntiPsychRRMVC.Models;
+using System.Diagnostics;
 
 namespace AntiPsychRRMVC.Controllers
 {
@@ -149,6 +151,13 @@ namespace AntiPsychRRMVC.Controllers
         private bool DrugExists(int id)
         {
             return _context.Drug.Any(e => e.DrugId == id);
+        }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
