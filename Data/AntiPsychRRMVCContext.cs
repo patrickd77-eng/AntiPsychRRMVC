@@ -16,5 +16,9 @@ namespace AntiPsychRRMVC.Data
         }
 
         public DbSet<AntiPsychRRMVC2.Models.Drug> Drug { get; set; }
+        public DbSet<AntiPsychRRMVC2.Models.DrugFrequency> DrugFrequency { get; set; }
+        public DbSet<AntiPsychRRMVC2.Models.DrugMaxDose> DrugMaxDose { get; set; }
+        public DbSet<AntiPsychRRMVC2.Models.DrugRoute> DrugRoute { get; set; }
+
     }
 }

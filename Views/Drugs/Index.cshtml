@@ -15,15 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.DrugName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DrugMaxDoseID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DrugRouteID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DrugFrequencyID)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -32,15 +23,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DrugName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DrugMaxDoseID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DrugRouteID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DrugFrequencyID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DrugId">Edit</a> |
