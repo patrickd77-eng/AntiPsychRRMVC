@@ -15,17 +15,17 @@ function updateFooterCopyrightDate() {
 
 function populateDrugSelectList() {
     //Variables for building request.
-//    var url = "/Drugs/GetDrugList",
+    var url = "/Drugs/GetDrugList",
 
-//    //Make request
-//    $.get(url, function (result) {
-//      
+        //Make request
+        $.get(url, function (result) {
 
-//           TODO: Add to select list
-//       
-//    });
-//})
+            console.log({result})
+            // TODO: Add to select list
+
+        });
 }
+
 
 $('#Reset').click(function (e) {
     location.reload();
@@ -35,26 +35,26 @@ $('#AddToDrugList').click(function (e) {
     //Prevent refresh
     e.preventDefault();
 
-//    //Variables for building request.
-//    var url = "/Home/ProcessSelectedDrug",
-//        drugId = $('#drug').val(),
-//        drugName = $('#drug :selected').attr("drugName"),
-//        maxDose = $('#drug :selected').attr("maxDose"),
-//        dose = $('#dose').val();
+    //    //Variables for building request.
+    //    var url = "/Home/ProcessSelectedDrug",
+    //        drugId = $('#drug').val(),
+    //        drugName = $('#drug :selected').attr("drugName"),
+    //        maxDose = $('#drug :selected').attr("maxDose"),
+    //        dose = $('#dose').val();
 
-//    //Make request
-//    $.get(url, { dose: dose, drugId: drugId, drugName: drugName, maxDose: maxDose }, function (result) {
-//        //Append new data if no errors.
-//        if (!result.errors.trim()) {
+    //    //Make request
+    //    $.get(url, { dose: dose, drugId: drugId, drugName: drugName, maxDose: maxDose }, function (result) {
+    //        //Append new data if no errors.
+    //        if (!result.errors.trim()) {
 
-//            $("#resultsArea").show();
-//            createResultsHtml(result);
-//            tallyPercentage(result);
-//        }
-//        else {
-//            alert("Did you forget to enter a dose? Please try again.");
-//        }
-//    });
+    //            $("#resultsArea").show();
+    //            createResultsHtml(result);
+    //            tallyPercentage(result);
+    //        }
+    //        else {
+    //            alert("Did you forget to enter a dose? Please try again.");
+    //        }
+    //    });
 })
 
 //function createResultsHtml(result) {
