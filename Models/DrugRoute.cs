@@ -11,7 +11,6 @@ namespace AntiPsychRRMVC2.Models
         [Required]
         [DisplayName("Route Name")]
         public string RouteName { get; set; }
-
         public Drug Drug { get; set; }
     }
 }

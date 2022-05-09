@@ -27,22 +27,22 @@ namespace AntiPsychRRMVC.Controllers
         }
 
         // GET: Drugs/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var drug = await _context.Drug
-                .FirstOrDefaultAsync(m => m.DrugId == id);
-            if (drug == null)
-            {
-                return NotFound();
-            }
+        //    var drug = await _context.Drug
+        //        .FirstOrDefaultAsync(m => m.DrugId == id);
+        //    if (drug == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(drug);
-        }
+        //    return View(drug);
+        //}
 
         // GET: Drugs/Create
         public IActionResult Create()

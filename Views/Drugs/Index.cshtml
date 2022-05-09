@@ -15,21 +15,38 @@
             <th>
                 @Html.DisplayNameFor(model => model.DrugName)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrugRoute)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrugFrequency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrugMaxDose)
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DrugName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DrugId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DrugId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DrugId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DrugName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DrugRoute)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DrugFrequency)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DrugMaxDose)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DrugId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DrugId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

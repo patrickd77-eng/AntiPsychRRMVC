@@ -12,7 +12,6 @@ namespace AntiPsychRRMVC2.Models
         [Column(TypeName = "decimal(6,2)")]
         [DisplayName("Max Dose")]
         public decimal MaximumDoseLimit { get; set; }
-
         public Drug Drug { get; set; }
     }
 }
