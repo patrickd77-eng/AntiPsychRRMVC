@@ -3,6 +3,9 @@
     //Give footer current year
     updateFooterCopyrightDate();
 
+    //Populate dropdownlist
+    populateDrugSelectList();
+
 });
 
 function updateFooterCopyrightDate() {
@@ -10,27 +13,30 @@ function updateFooterCopyrightDate() {
     $("#currentDate").html(today.getFullYear());
 }
 
+function populateDrugSelectList() {
+    //Variables for building request.
+//    var url = "/Drugs/GetDrugList",
 
-//$(document).ready(function () {
-//    // hide areas that aren't needed yet.
-//    $("#resultsArea").hide();
-//    $("#warnings").hide();
+//    //Make request
+//    $.get(url, function (result) {
+//      
 
-//    //Give footer current year
-//    updateFooterCopyrightDate();
-
-//});
-
-//$('#Reset').click(function (e) {
-//    location.reload();
+//           TODO: Add to select list
+//       
+//    });
 //})
+}
 
-//$('#AddToList').click(function (e) {
-//    //Prevent refresh
-//    e.preventDefault();
+$('#Reset').click(function (e) {
+    location.reload();
+})
+
+$('#AddToDrugList').click(function (e) {
+    //Prevent refresh
+    e.preventDefault();
 
 //    //Variables for building request.
-//    var url = "/Home/ProcessDrug",
+//    var url = "/Home/ProcessSelectedDrug",
 //        drugId = $('#drug').val(),
 //        drugName = $('#drug :selected').attr("drugName"),
 //        maxDose = $('#drug :selected').attr("maxDose"),
@@ -49,7 +55,7 @@ function updateFooterCopyrightDate() {
 //            alert("Did you forget to enter a dose? Please try again.");
 //        }
 //    });
-//})
+})
 
 //function createResultsHtml(result) {
 //    $("#resultData").append("<tr class=\"card alert-info\"><td>"
@@ -65,11 +71,6 @@ function updateFooterCopyrightDate() {
 //    newPercentage = parseInt(getCurrentPercentage) + parseInt(result.maxDoseUtilisation)
 //    $("#percentage").val(newPercentage)
 //    checkMaxDoseUsage(newPercentage);
-//}
-
-//function updateFooterCopyrightDate() {
-//    var today = new Date();
-//    $("#Year").html(today.getFullYear());
 //}
 
 //function checkMaxDoseUsage(newPercentage) {
