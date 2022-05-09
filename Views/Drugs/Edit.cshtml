@@ -14,12 +14,25 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="DrugId" />
             <div class="form-group">
+                 <!--Drug Name-->
                 <label asp-for="DrugName" class="control-label"></label>
                 <input asp-for="DrugName" class="form-control" />
                 <span asp-validation-for="DrugName" class="text-danger"></span>
+                <!--Drug Route-->
+                <label asp-for="DrugRoute.RouteName" class="control-label"></label>
+                <input asp-for="DrugRoute.RouteName" class="form-control" />
+                <span asp-validation-for="DrugRoute.RouteName" class="text-danger"></span>
+                <!--Drug Frequency-->
+                <label asp-for="DrugFrequency.FrequencyDetails" class="control-label"></label>
+                <input asp-for="DrugFrequency.FrequencyDetails" class="form-control" />
+                <span asp-validation-for="DrugFrequency.FrequencyDetails" class="text-danger"></span>
+                <!--Drug Max Dose-->
+                <label asp-for="DrugMaxDose.MaximumDoseLimit" class="control-label"></label>
+                <input asp-for="DrugMaxDose.MaximumDoseLimit" type="number" class="form-control" />
+                <span asp-validation-for="DrugMaxDose.MaximumDoseLimit" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary mt-2" />
             </div>
         </form>
     </div>
