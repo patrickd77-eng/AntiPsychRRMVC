@@ -8,10 +8,11 @@ namespace AntiPsychRRMVC2.Models
     {
         [Key]
         public int DrugMaxDoseID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter a dose limit for this drug.")]
         [Column(TypeName = "decimal(6,2)")]
         [DisplayName("Max Dose")]
         public decimal MaximumDoseLimit { get; set; }
-        public Drug Drug { get; set; }
+        [ForeignKey("DrugId")]
+        public int DrugId { get; set; }
     }
 }

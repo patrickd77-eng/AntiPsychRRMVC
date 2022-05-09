@@ -8,10 +8,11 @@ namespace AntiPsychRRMVC2.Models
     {
         [Key]
         public int FrequencyId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter a frequency for this drug. EG Once daily.")]
         [DisplayName("Frequency Name")]
+        [DataType(DataType.Text)]
         public string FrequencyDetails { get; set; }
-        public Drug Drug { get; set; }
-
+        [ForeignKey("DrugId")]
+        public int DrugId { get; set; }
     }
 }

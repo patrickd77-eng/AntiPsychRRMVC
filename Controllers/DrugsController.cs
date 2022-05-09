@@ -23,26 +23,32 @@ namespace AntiPsychRRMVC.Controllers
         // GET: Drugs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Drug.ToListAsync());
+            var drugs = await _context.Drug
+                .Include(f=>f.DrugFrequency)
+                .Include(d=>d.DrugMaxDose)
+                .Include(r=>r.DrugRoute)
+                .AsNoTracking().ToListAsync();
+
+            return View(drugs);
         }
 
-        // GET: Drugs/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+       // GET: Drugs/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var drug = await _context.Drug
-        //        .FirstOrDefaultAsync(m => m.DrugId == id);
-        //    if (drug == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var drug = await _context.Drug
+                .FirstOrDefaultAsync(m => m.DrugId == id);
+            if (drug == null)
+            {
+                return NotFound();
+            }
 
-        //    return View(drug);
-        //}
+            return View(drug);
+        }
 
         // GET: Drugs/Create
         public IActionResult Create()
@@ -55,7 +61,7 @@ namespace AntiPsychRRMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DrugId,DrugName,DrugRoute,DrugFrequency,DrugMaxDose")] Drug drug)
+        public async Task<IActionResult> Create(Drug drug)
         {
             if (ModelState.IsValid)
             {

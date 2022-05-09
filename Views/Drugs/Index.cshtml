@@ -34,13 +34,13 @@
                     @Html.DisplayFor(modelItem => item.DrugName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DrugRoute)
+                    @Html.DisplayFor(modelItem => item.DrugRoute.RouteName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DrugFrequency)
+                    @Html.DisplayFor(modelItem => item.DrugFrequency.FrequencyDetails)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DrugMaxDose)
+                    @Html.DisplayFor(modelItem => item.DrugMaxDose.MaximumDoseLimit)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.DrugId">Edit</a> |
