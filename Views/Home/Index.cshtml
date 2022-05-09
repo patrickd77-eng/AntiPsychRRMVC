@@ -4,7 +4,51 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-   <a asp-action="Index" asp-controller="Drugs" class="btn btn-primary btn-lg m-auto p-5">Go to Max Dose Checker -></a>
-   <a asp-action="Index" asp-controller="GoToAccount" class="btn btn-secondary btn-lg m-auto p-5">Go to My Account -></a>
-
+    <a asp-action="Index" asp-controller="Drugs" class="btn btn-primary btn-lg m-auto p-5">Go to Drug List -></a>
+    <a asp-action="Index" asp-controller="GoToAccount" class="btn btn-secondary btn-lg m-auto p-5">Go to My Account -></a>
+</div>
+<div>
+    <hr />
+    <h2>Max Dose Checker</h2>
+    <form>
+        <div>Select a drug: </div>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Choose a drug...</option>
+          <option value="1">One</option>
+        </select>
+        <label for="dose">Enter current dose: </label>
+        <input id="dose" type="number" placeholder="100.00"/>
+        <button onclick="addToDrugList()" type="submit" class="btn btn-success mt-1">Add for checking</button>
+        <button onclick="reset()" type="submit" class="btn btn-secondary mt-1">Reset page</button>
+    </form>
+    <hr />
+    <div>
+        <h3>Overall Max Dose Utilisation:</h3>
+        <div class="alert-info alert mx-auto text-center" style="font-size:150%;font-weight:bold;">
+            53%
+        </div>
+        <h4>Drugs added:</h4>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Drug</th>
+                    <th scope="col">Frequency</th>
+                    <th scope="col">Route</th>
+                    <th scope="col">BNF maximum dose</th>
+                    <th scope="col">Dose given</th>
+                    <th scope="col">Percentage of max dose given</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

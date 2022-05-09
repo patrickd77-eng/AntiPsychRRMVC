@@ -100,8 +100,12 @@ namespace AntiPsychRRMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DrugId,DrugName")] Drug drug)
+        public async Task<IActionResult> Edit(int id, Drug drug)
         {
+            // // // // // // // // 
+            //Bug with duplicate key TO RESOLVE
+            // // // // // // // // 
+
             if (id != drug.DrugId)
             {
                 return NotFound();
