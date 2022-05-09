@@ -80,7 +80,14 @@ namespace AntiPsychRRMVC.Controllers
                 return NotFound();
             }
 
-            var drug = await _context.Drug.FindAsync(id);
+            var drug = await _context.Drug
+                .Include(f => f.DrugFrequency)
+                .Include(d => d.DrugMaxDose)
+                .Include(r => r.DrugRoute)
+                .Where(i => i.DrugId == id)
+                .AsNoTracking().FirstOrDefaultAsync();
+
+         
             if (drug == null)
             {
                 return NotFound();
