@@ -15,13 +15,25 @@ function updateFooterCopyrightDate() {
 
 function populateDrugSelectList() {
     //Variables for building request.
-    var url = "/Drugs/GetDrugList",
+    var url = "/Home/GetDrugList";
 
         //Make request
         $.get(url, function (result) {
 
-            console.log({result})
+            console.log({ result })
+            console.log(result.drugName
+                + " " + result.drugFrequency.frequencyDetails
+                + " " + result.drugMaxDose.MaximumDoseLimit
+                + " " + result.drugRoute.routeName)
             // TODO: Add to select list
+            result.each(function () {
+
+
+
+                $("#drug").append("option")
+                    //< option value="" name="" selected > Choose a drug...</option >
+
+            })
 
         });
 }

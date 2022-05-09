@@ -1,15 +1,19 @@
 ﻿using AntiPsychRRMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using AntiPsychRRMVC.Data;
 
 namespace AntiPsychRRMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly AntiPsychRRMVCContext _context;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AntiPsychRRMVCContext context)
         {
+            _context = context;
             _logger = logger;
         }
 
@@ -17,7 +21,28 @@ namespace AntiPsychRRMVC.Controllers
         {
             return View();
         }
+        [ResponseCache(Duration = 3, Location = ResponseCacheLocation.Client, NoStore = true)]
 
+        public async Task<IActionResult> GetDrugList()
+        {
+            try
+            {
+                var drugs = await _context.Drug
+                   .Include(f => f.DrugFrequency)
+                   .Include(d => d.DrugMaxDose)
+                   .Include(r => r.DrugRoute)
+                   .AsNoTracking().ToListAsync();
+
+                return Ok(drugs);
+
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+        }
+        [ResponseCache(Duration = 3, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Privacy()
         {
             return View();
@@ -29,7 +54,7 @@ namespace AntiPsychRRMVC.Controllers
             return Ok();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 3, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

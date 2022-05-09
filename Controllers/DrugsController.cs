@@ -20,19 +20,7 @@ namespace AntiPsychRRMVC.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> GetDrugList()
-        {
-            var drugs = await _context.Drug
-               .Include(f => f.DrugFrequency)
-               .Include(d => d.DrugMaxDose)
-               .Include(r => r.DrugRoute)
-               .AsNoTracking().ToListAsync();
-
-            return (IActionResult)drugs;
-        }
-
-
-        // GET: Drugs
+       // GET: Drugs
         public async Task<IActionResult> Index()
         {
             var drugs = await _context.Drug
