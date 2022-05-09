@@ -12,10 +12,10 @@ namespace AntiPsychRRMVC2.Models
         [DisplayName("Drug Name")]
         public string DrugName { get; set; }
         [DisplayName("Drug Frequency")]
-        public ICollection<DrugFrequency> DrugFrequency { get; set; }
+        public List<DrugFrequency> DrugFrequency { get; set; }
         [DisplayName("Drug Max Dose")]
-        public ICollection<DrugMaxDose> DrugMaxDose { get; set; }
+        public List<DrugMaxDose> DrugMaxDose { get; set; }
         [DisplayName("Drug Route")]
-        public ICollection<DrugRoute> DrugRoute { get; set; }
+        public List<DrugRoute> DrugRoute { get; set; }
     }
 }

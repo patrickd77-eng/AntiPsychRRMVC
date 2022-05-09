@@ -21,29 +21,24 @@
                 <label asp-for="DrugRoute" class="control-label"></label>
                 <input asp-for="DrugRoute" class="form-control" />
                 <span asp-validation-for="DrugRoute" class="text-danger"></span>
-
                 <!--Drug Frequency-->
                 <label asp-for="DrugFrequency" class="control-label"></label>
                 <input asp-for="DrugFrequency" class="form-control" />
                 <span asp-validation-for="DrugFrequency" class="text-danger"></span>
-
                 <!--Drug Max Dose-->
                 <label asp-for="DrugMaxDose" class="control-label"></label>
-                <input asp-for="DrugMaxDose" class="form-control" />
+                <input asp-for="DrugMaxDose" type="number" class="form-control" />
                 <span asp-validation-for="DrugMaxDose" class="text-danger"></span>
-
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create new drug" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to main list</a>
 </div>
-
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
