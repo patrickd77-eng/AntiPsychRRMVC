@@ -22,7 +22,6 @@ namespace AntiPsychRRMVC.Controllers
             return View();
         }
         [ResponseCache(Duration = 3, Location = ResponseCacheLocation.Client, NoStore = true)]
-
         public async Task<IActionResult> GetDrugList()
         {
             try
@@ -33,12 +32,14 @@ namespace AntiPsychRRMVC.Controllers
                    .Include(r => r.DrugRoute)
                    .AsNoTracking().ToListAsync();
 
-                return Ok(drugs);
+                return Json(drugs);
+
+                
 
             }
             catch (Exception e)
             {
-
+                return BadRequest();
                 throw;
             }
         }

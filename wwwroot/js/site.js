@@ -17,25 +17,21 @@ function populateDrugSelectList() {
     //Variables for building request.
     var url = "/Home/GetDrugList";
 
-        //Make request
-        $.get(url, function (result) {
+    //Make request
+    $.get(url, function (result) {
 
-            console.log({ result })
-            console.log(result.drugName
-                + " " + result.drugFrequency.frequencyDetails
-                + " " + result.drugMaxDose.MaximumDoseLimit
-                + " " + result.drugRoute.routeName)
-            // TODO: Add to select list
-            result.each(function () {
+        $.each(result, function (i,value) {
+            var drugId = i;
+            console.log(drugId)
+            console.log(value)
+            // TODO: Add to select list once values known, testing above in console.
 
+            //eg value.drugName
 
-
-                $("#drug").append("option")
-                    //< option value="" name="" selected > Choose a drug...</option >
-
-            })
-
+            // $("#drug").append("option")
+            //< option value="" name="" selected > Choose a drug...</option >
         });
+    });
 }
 
 
