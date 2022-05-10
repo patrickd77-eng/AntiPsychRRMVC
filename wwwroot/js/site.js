@@ -17,20 +17,31 @@ function populateDrugSelectList() {
     //Variables for building request.
     var url = "/Home/GetDrugList";
 
-    //Make request
-    $.get(url, function (result) {
+    //Make async request
+    $.ajax({
+        url: url, async: true, success: function (result) {
+            $.each(result, function (i, data) {
+                //Declare variables per array item in result
+                var drugId = data.drugId,
+                    drugName = data.drugName,
+                    drugFrequency = data.drugFrequency.frequencyDetails,
+                    drugRoute = data.drugRoute.routeName,
+                    drugMaximumDose = data.drugMaxDose.maximumDoseLimit;
 
-        $.each(result, function (i,value) {
-            var drugId = i;
-            console.log(drugId)
-            console.log(value)
-            // TODO: Add to select list once values known, testing above in console.
+                //Create HTML string for option syntax
+                var drugOption =
+                    "<option name=\"" +
+                    drugName + "\" value=\"" + drugId + "\">" +
+                    drugName + " " +
+                    drugRoute + " " +
+                    drugFrequency + " " +
+                    drugMaximumDose +
+                    "</option>"
 
-            //eg value.drugName
-
-            // $("#drug").append("option")
-            //< option value="" name="" selected > Choose a drug...</option >
-        });
+                //Append each option to the select
+                $("#drugSelect").append(drugOption);
+            });
+        }
     });
 }
 
