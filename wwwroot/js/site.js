@@ -54,12 +54,12 @@ $('#AddToDrugList').click(function (e) {
     //Prevent refresh
     e.preventDefault();
 
-    //    //Variables for building request.
-    //    var url = "/Home/ProcessSelectedDrug",
-    //        drugId = $('#drug').val(),
-    //        drugName = $('#drug :selected').attr("drugName"),
-    //        maxDose = $('#drug :selected').attr("maxDose"),
-    //        dose = $('#dose').val();
+    //Variables for building request.
+    var url = "/Home/ProcessSelectedDrug",
+        drugId = $('#drugSelect').val(),
+        drugName = $('#drugSelect :selected').attr("name"),
+        maxDose = $('#drugSelect :selected').attr("maxDose"),
+        dose = $('#dose').val();
 
     //    //Make request
     //    $.get(url, { dose: dose, drugId: drugId, drugName: drugName, maxDose: maxDose }, function (result) {
