@@ -49,10 +49,23 @@ namespace AntiPsychRRMVC.Controllers
             return View();
         }
 
-        public IActionResult ProcessSelectedDrug()
+        [HttpPost]
+        public async Task<IActionResult> ProcessSelectedDrug(int id, decimal dose)
         {
 
-            return Ok();
+            var drugMaxDose = await _context.Drug
+                   .Where(i => i.DrugId == id)
+                   .Select(d=>d.DrugMaxDose.MaximumDoseLimit)
+                   .FirstOrDefaultAsync();
+
+            var result = new
+            {
+                drugMaxDose = drugMaxDose,
+                dose = dose,
+                doseUtilisation = dose / drugMaxDose * 100
+            };
+
+            return Json(result); 
         }
 
         [ResponseCache(Duration = 3, Location = ResponseCacheLocation.None, NoStore = true)]

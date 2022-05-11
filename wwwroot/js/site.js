@@ -37,6 +37,8 @@ function populateDrugSelectList() {
                     drugFrequency + " " +
                     drugMaximumDose +
                     "</option>"
+                //Delete 'loading' message from select.
+                $("#delete").remove();
 
                 //Append each option to the select
                 $("#drugSelect").append(drugOption);
@@ -61,19 +63,20 @@ $('#AddToDrugList').click(function (e) {
         maxDose = $('#drugSelect :selected').attr("maxDose"),
         dose = $('#dose').val();
 
-    //    //Make request
-    //    $.get(url, { dose: dose, drugId: drugId, drugName: drugName, maxDose: maxDose }, function (result) {
-    //        //Append new data if no errors.
-    //        if (!result.errors.trim()) {
+    $.ajax(
+        {
+            type: "POST", //HTTP POST Method
+            async:true,
+            url: url, // Controller/View 
+            data: { //Passing data
+                id: drugId,
+                dose: dose
+            },
+            success: function (result) {
+                console.log({ result });
+            }
+        });
 
-    //            $("#resultsArea").show();
-    //            createResultsHtml(result);
-    //            tallyPercentage(result);
-    //        }
-    //        else {
-    //            alert("Did you forget to enter a dose? Please try again.");
-    //        }
-    //    });
 })
 
 //function createResultsHtml(result) {
