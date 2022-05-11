@@ -60,7 +60,6 @@ $('#AddToDrugList').click(function (e) {
     var url = "/Home/ProcessSelectedDrug",
         drugId = $('#drugSelect').val(),
         drugName = $('#drugSelect :selected').attr("name"),
-        maxDose = $('#drugSelect :selected').attr("maxDose"),
         dose = $('#dose').val();
 
     $.ajax(
@@ -73,7 +72,24 @@ $('#AddToDrugList').click(function (e) {
                 dose: dose
             },
             success: function (result) {
-                console.log({ result });
+
+                  //<td id="addedDrug"></td>
+                  //  <td id="addedDrugFrequency"></td>
+                  //  <td id="addedDrugRoute"></td>
+                  //  <td id="addedDrugMaxDose"></td>
+                  //  <td id="addedDrugDose"></td>
+                  //  <td id="addedDrugUtilisation">%</td>
+
+                console.log({result})
+
+                $('#addedDrug').append("<td><p>" + drugName + "</p></td>")
+                $('#addedDrug').append("<td><p>" + TODO + "</p></td>")
+                $('#addedDrug').append("<td><p>" + TODO + "</p></td>")
+                $('#addedDrug').append("<td><p>" + result['drugMaxDose'] + "</p></td>")
+                $('#addedDrug').append("<td><p>" + dose + "</p></td>")
+                $('#addedDrug').append("<td><p>" + result['doseUtilisation'] + "%</p></td>")
+
+
             }
         });
 

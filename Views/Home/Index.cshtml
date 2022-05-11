@@ -10,14 +10,14 @@
 <div>
     <hr />
     <h2>Max Dose Checker</h2>
-    <form>
+    <form action="post">
         <label class="form-label" for="drugSelect">Select a drug: </label>
         <select id="drugSelect" class="form-select form-control" aria-label="Default select example">
             <!--Options provided by jquery request-->
             <option id="delete" selected>Loading...</option>
         </select>
         <label class="form-label" for="dose">Enter current dose: </label>
-        <input id="dose" type="number" class="form-control-plaintext border" placeholder="100.00" />
+        <input id="dose" type="number" required class="form-control-plaintext border" placeholder="100.00" />
         <button id="AddToDrugList" type="submit" class="btn btn-success mt-1">Add this drug</button>
         <button onclick="reset()" type="submit" class="btn btn-secondary mt-1">Reset page</button>
     </form>
@@ -40,13 +40,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td id="addedDrug"></td>
-                    <td id="addedDrugFrequency"></td>
-                    <td id="addedDrugRoute"></td>
-                    <td id="addedDrugMaxDose"></td>
-                    <td id="addedDrugDose"></td>
-                    <td id="addedDrugUtilisation">%</td>
+                <tr id="addedDrug">
                 </tr>
             </tbody>
         </table>
