@@ -59,6 +59,7 @@ $('#AddToDrugList').click(function (e) {
     //Prevent refresh
     e.preventDefault();
 
+
     //Variables for building request.
     var url = "/Home/ProcessSelectedDrug",
         drugId = $('#drugSelect').val(),
@@ -67,46 +68,53 @@ $('#AddToDrugList').click(function (e) {
         drugName = $('#drugSelect :selected').attr("name"),
         dose = $('#dose').val();
 
-    $.ajax(
-        {
-            type: "POST", //HTTP POST Method
-            async:true,
-            url: url, // Controller/View 
-            data: { //Passing data
-                id: drugId,
-                dose: dose
-            },
-            success: function (result) {
+    if (dose == "") {
+        alert("Enter a dose...")
+    }
+    else {
 
-                console.log({result})
+        $.ajax(
+            {
+                type: "POST", //HTTP POST Method
+                async: true,
+                url: url, // Controller/View 
+                data: { //Passing data
+                    id: drugId,
+                    dose: dose
+                },
+                success: function (result) {
 
-                $('#addedDrug').append("<td><p>" + drugName + "</p></td>")
-                $('#addedDrug').append("<td><p>" + drugFrequency + "</p></td>")
-                $('#addedDrug').append("<td><p>" + drugRoute + "</p></td>")
-                $('#addedDrug').append("<td><p>" + result['drugMaxDose'] + "</p></td>")
-                $('#addedDrug').append("<td><p>" + dose + "</p></td>")
-                $('#addedDrug').append("<td><p>" + result['doseUtilisation'] + "%</p></td>")
+                    $('#addedDrug').append(
+                        "<tr><td><p>" + drugName + "</p></td>" +
+                        "<td><p>" + drugFrequency + "</p></td>" +
+                        "<td><p>" + drugRoute + "</p></td>" +
+                        "<td><p>" + result['drugMaxDose'] + "</p></td>" +
+                        "<td><p>" + dose + "</p></td>" +
+                        "<td><p>" + result['doseUtilisation'] +
+                        "%</p></td></tr>")
 
-            }
-        });
-
+                    tallyPercentage(result);
+                }
+            });
+    }
 })
 
-//function tallyPercentage(result) {
-//    var getCurrentPercentage = $("#percentage").val();
-//    newPercentage = parseInt(getCurrentPercentage) + parseInt(result.maxDoseUtilisation)
-//    $("#percentage").val(newPercentage)
-//    checkMaxDoseUsage(newPercentage);
-//}
+function tallyPercentage(result) {
+    var getCurrentPercentage = $("#percentageMax").val();
+    newPercentage = parseInt(getCurrentPercentage) + parseInt(result['doseUtilisation'])
+    $("#percentageMax").val(newPercentage)
+    checkMaxDoseUsage(newPercentage);
+}
 
-//function checkMaxDoseUsage(newPercentage) {
-//    if (newPercentage >= 100) {
-//        //Display max dose usage warning 
-//        displayMaxDosePercentWarning();
-//    }
-//}
+function checkMaxDoseUsage(newPercentage) {
+    if (newPercentage >= 100) {
+        //Display max dose usage warning 
+        displayMaxDosePercentWarning();
+    }
+}
 
-//function displayMaxDosePercentWarning() {
-//    $("#warnings").show();
-//    $("#percentageWarning").text("The maximum recommended dose percentage has been reached.");
-//    $("#utilisationContainer").addClass("alert-warning").removeClass("alert-info");
+function displayMaxDosePercentWarning() {
+    $("#warnings").show();
+    $("#percentageWarning").text("The maximum recommended dose percentage has been reached.");
+    $("#overallMaxDose").addClass("alert-warning").removeClass("alert-info");
+}
