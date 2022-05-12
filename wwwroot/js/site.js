@@ -30,8 +30,12 @@ function populateDrugSelectList() {
 
                 //Create HTML string for option syntax
                 var drugOption =
-                    "<option name=\"" +
-                    drugName + "\" value=\"" + drugId + "\">" +
+                    "<option drugFrequency=\"" +
+                    drugFrequency + "\"" +
+                    "drugRoute=\"" + drugRoute
+                    + "\"" + "name =\"" +
+                    drugName + "\" value=\"" +
+                    drugId + "\">" +
                     drugName + " " +
                     drugRoute + " " +
                     drugFrequency + " " +
@@ -47,7 +51,6 @@ function populateDrugSelectList() {
     });
 }
 
-
 $('#Reset').click(function (e) {
     location.reload();
 })
@@ -59,6 +62,8 @@ $('#AddToDrugList').click(function (e) {
     //Variables for building request.
     var url = "/Home/ProcessSelectedDrug",
         drugId = $('#drugSelect').val(),
+        drugFrequency = $('#drugSelect :selected').attr("drugfrequency"),
+        drugRoute = $('#drugSelect :selected').attr("drugroute"),
         drugName = $('#drugSelect :selected').attr("name"),
         dose = $('#dose').val();
 
@@ -73,36 +78,19 @@ $('#AddToDrugList').click(function (e) {
             },
             success: function (result) {
 
-                  //<td id="addedDrug"></td>
-                  //  <td id="addedDrugFrequency"></td>
-                  //  <td id="addedDrugRoute"></td>
-                  //  <td id="addedDrugMaxDose"></td>
-                  //  <td id="addedDrugDose"></td>
-                  //  <td id="addedDrugUtilisation">%</td>
-
                 console.log({result})
 
                 $('#addedDrug').append("<td><p>" + drugName + "</p></td>")
-                $('#addedDrug').append("<td><p>" + TODO + "</p></td>")
-                $('#addedDrug').append("<td><p>" + TODO + "</p></td>")
+                $('#addedDrug').append("<td><p>" + drugFrequency + "</p></td>")
+                $('#addedDrug').append("<td><p>" + drugRoute + "</p></td>")
                 $('#addedDrug').append("<td><p>" + result['drugMaxDose'] + "</p></td>")
                 $('#addedDrug').append("<td><p>" + dose + "</p></td>")
                 $('#addedDrug').append("<td><p>" + result['doseUtilisation'] + "%</p></td>")
-
 
             }
         });
 
 })
-
-//function createResultsHtml(result) {
-//    $("#resultData").append("<tr class=\"card alert-info\"><td>"
-//        + "<p><b>Drug</b>: " + result.drugName + "</p>"
-//        + "<p><b>Dose Entered:</b> " + result.dose + "</p>"
-//        + "<p><b>Max Dose:</b> " + result.maxDose + "</p>"
-//        + "<p><b>Max dose utilisation (this drug):</b> " + result.maxDoseUtilisation + "%" + "</p>"
-//        + "<br></td></tr>");
-//}
 
 //function tallyPercentage(result) {
 //    var getCurrentPercentage = $("#percentage").val();
@@ -122,6 +110,3 @@ $('#AddToDrugList').click(function (e) {
 //    $("#warnings").show();
 //    $("#percentageWarning").text("The maximum recommended dose percentage has been reached.");
 //    $("#utilisationContainer").addClass("alert-warning").removeClass("alert-info");
-
-
-//}
