@@ -13,23 +13,57 @@ function updateFooterCopyrightDate() {
     $("#currentDate").html(today.getFullYear());
 }
 
-function populateFrequencyList() {
+function clearFrequencyList() {
+    $("#frequency").empty();
+    populateFrequencyList();
+}
 
-    var url = "/Home/GetDrugTypeFrequencies",
-        drugId = $('#drugSelect').val(),
-        drugRoute = $('#drugSelect :selected').attr("drugroute"),
-        dose = $('#dose').val();
+function populateFrequencyList(route) {
+
+    if (route == null) {
+        route = $('#drugSelect :selected').attr("drugroute")
+    }
+
+    var url = "/Home/GetDoseFrequencies",
+        drugRoute = route;
 
     $.ajax({
-        url: url, async: true, data: { //Passing data
-            dose: dose,
+        url: url, async: true, data: {
             route: drugRoute
         }, success: function (result) {
+            $.each(result, function (i, data) {
+                //Increment to change from zero index to start at 1.
+                i++
 
+                //Contains three words
+                if (data.split(/(?=[A-Z])/).length > 2) {
 
+                    var seperateDoseFrequencyText =
+                        data.split(/(?=[A-Z])/)[0] + " " +
+                        data.split(/(?=[A-Z])/)[1] + " " +
+                        data.split(/(?=[A-Z])/)[2]
+                }
+                //Contains two words
+                else {
+                    var seperateDoseFrequencyText =
+                        data.split(/(?=[A-Z])/)[0] + " " +
+                        data.split(/(?=[A-Z])/)[1]
+                }
+
+                var frequencyOption =
+                    "<option name =\"" +
+                    data + "\" value=\"" +
+                    i + "\">" + seperateDoseFrequencyText +
+                    "</option>"
+                //Delete 'loading' message from select.
+                $("#deleteTwo").remove();
+
+                //Append each option to the select
+                $("#frequency").append(frequencyOption);
+
+            })
         }
     });
-
 }
 
 function populateDrugSelectList() {
@@ -38,7 +72,7 @@ function populateDrugSelectList() {
 
     //Make async request
     $.ajax({
-        url: url, async: true, success: function (result) {
+        url: url, async: false, success: function (result) {
             $.each(result, function (i, data) {
                 //Declare variables per array item in result
                 var drugId = data.drugId,
@@ -65,6 +99,7 @@ function populateDrugSelectList() {
                 //Append each option to the select
                 $("#drugSelect").append(drugOption);
             });
+            populateFrequencyList($('#drugSelect :selected').attr("drugroute"))
         }
     });
 }
@@ -86,7 +121,7 @@ $('#AddToDrugList').click(function (e) {
     //Variables for building request.
     var url = "/Home/ProcessSelectedDrug",
         drugId = $('#drugSelect').val(),
-        drugFrequency = $('#drugSelect :selected').attr("drugfrequency"),
+        drugFrequency = $('#frequency :selected').val(),
         drugRoute = $('#drugSelect :selected').attr("drugroute"),
         drugName = $('#drugSelect :selected').attr("name"),
         dose = $('#dose').val();
@@ -103,7 +138,9 @@ $('#AddToDrugList').click(function (e) {
                 url: url, // Controller/View 
                 data: { //Passing data
                     id: drugId,
-                    dose: dose
+                    dose: dose,
+                    frequencyModifier: drugFrequency,
+                    route: drugRoute
                 },
                 success: function (result) {
 
@@ -112,7 +149,7 @@ $('#AddToDrugList').click(function (e) {
                         "<td><p>" + drugFrequency + "</p></td>" +
                         "<td><p>" + drugRoute + "</p></td>" +
                         "<td><p>" + result['drugMaxDose'] + "</p></td>" +
-                        "<td><p>" + dose + "</p></td>" +
+                        "<td><p>" + result.dose + "</p></td>" +
                         "<td><p>" + result['doseUtilisation'] +
                         "%</p></td></tr>")
 
