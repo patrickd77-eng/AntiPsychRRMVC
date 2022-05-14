@@ -11,17 +11,41 @@
     <h4>Drug</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <!--Name-->
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DrugName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DrugName)
         </dd>
+        <!--Route-->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DrugRoute.RouteName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrugRoute.RouteName)
+        </dd>
+        <!--Frequency-->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DrugFrequency.FrequencyDetails)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrugFrequency.FrequencyDetails)
+        </dd>
+        <!--Max Dose-->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DrugMaxDose.MaximumDoseLimit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DrugMaxDose.MaximumDoseLimit)
+        </dd>
+
     </dl>
-    
+
     <form asp-action="Delete">
-        <input type="hidden" asp-for="DrugId" />
+        <input type="hidden" readonly asp-for="DrugId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+          <a asp-action="Index" class="btn btn-outline-secondary mt-1">Back to List</a>
+
     </form>
 </div>

@@ -1,16 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <a asp-action="Index" asp-controller="Drugs" class="btn btn-primary btn-lg m-auto p-5">Go to Drug List -></a>
-    <a asp-action="Index" asp-controller="GoToAccount" class="btn btn-secondary btn-lg m-auto p-5">Go to My Account -></a>
+<div class="text-center container" style="display:grid;">
+    <a asp-action="Index" asp-controller="Drugs" class="btn btn-primary btn-lg mx-auto">Go to Drug Database</a>
+    <a asp-action="Index" asp-controller="GoToAccount" class="btn btn-secondary btn-lg mx-auto mt-2">Go to My Account</a>
 </div>
-<div>
+<div class="container">
     <hr />
-    <h2>Max Dose Checker</h2>
-    <form action="post">
+    <h4>Drug List</h4>
+    <p>Please select a drug, enter a dose and add it to the dose checker below.</p>
+    <form>
         <label class="form-label" for="drugSelect">Select a drug: </label>
         <select id="drugSelect" class="form-select form-control" aria-label="Default select example">
             <!--Options provided by jquery request-->
@@ -22,29 +21,31 @@
         <button onclick="reset()" type="submit" class="btn btn-secondary mt-1">Reset page</button>
     </form>
     <hr />
-    <div>
-        <h3>Overall Max Dose Utilisation:</h3>
+    <div class="container">
+        <h4>Max Dose Utilisation Checker</h4>
         <div id="overallMaxDose" class="alert-info alert mx-auto text-center mx-auto" style="font-size:150%;font-weight:bold;">
             <input readonly disabled id="percentageMax" value="0" class="form-control-plaintext text-center" type="number" placeholder="No drugs added" />
-            <div id="warnings" style="display:none;">
+            <div id="warnings" style="display:none;" class="container">
                 <p id="percentageWarning"></p>
             </div>
         </div>
-        <h3>Drugs counted:</h3>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Drug</th>
-                    <th scope="col">Frequency</th>
-                    <th scope="col">Route</th>
-                    <th scope="col">BNF maximum dose</th>
-                    <th scope="col">Dose given</th>
-                    <th scope="col">Percentage of max dose given</th>
-                </tr>
-            </thead>
-            <tbody id="addedDrug">
-                <!--To be populated by jquery-->
-            </tbody>
-        </table>
+        <h4>Drugs counted:</h4>
+        <div class="container" style="overflow:auto;">
+            <table class="table table-hover table-responsive table-bordered table-striped table-info">
+                <thead>
+                    <tr>
+                        <th scope="col">Drug</th>
+                        <th scope="col">Frequency</th>
+                        <th scope="col">Route</th>
+                        <th scope="col">Max dose</th>
+                        <th scope="col">Dose</th>
+                        <th scope="col">% Max dose given</th>
+                    </tr>
+                </thead>
+                <tbody id="addedDrug">
+                    <!--To be populated by jquery-->
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

@@ -115,6 +115,6 @@ function checkMaxDoseUsage(newPercentage) {
 
 function displayMaxDosePercentWarning() {
     $("#warnings").show();
-    $("#percentageWarning").text("The maximum recommended dose percentage has been reached.");
+    $("#percentageWarning").text("High Dose Antipsychotics: the BNF maximum recommended dose percentage has been reached. However, you may continue to add drugs.");
     $("#overallMaxDose").addClass("alert-warning").removeClass("alert-info");
 }

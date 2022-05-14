@@ -6,47 +6,54 @@
 
 <h1>Drug List</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DrugName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DrugRoute)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DrugFrequency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DrugMaxDose)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="container" style="overflow:auto;">
+
+    <table class="table table-responsive table-striped table-bordered table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DrugName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DrugRoute.RouteName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DrugFrequency.FrequencyDetails)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DrugMaxDose.MaximumDoseLimit)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.DrugId" class="btn btn-outline-secondary">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.DrugId" class="btn btn-outline-danger">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.DrugName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DrugRoute)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DrugFrequency)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DrugMaxDose)
+                </th>
+                <th>
+                    <p>Options</p>
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrugName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrugRoute.RouteName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrugFrequency.FrequencyDetails)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DrugMaxDose.MaximumDoseLimit)
+                    </td>
+                    <td style="display:grid;" class="mx-auto">
+                        <a asp-action="Edit" asp-route-id="@item.DrugId" class="btn btn-outline-secondary p-3">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.DrugId" class="btn btn-outline-danger p-3 mt-3">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
 <div>
     <a asp-action="Create" class="btn btn-success">Create New Drug</a>
 </div>
