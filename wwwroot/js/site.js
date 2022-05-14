@@ -51,9 +51,15 @@ function populateDrugSelectList() {
     });
 }
 
+$('#scroll').click(function (e) {
+    e.preventDefault();
+    $("html, body").animate({ scrollTop: $("#drugTop").scrollTop() }, 1000);
+});
+
+
 $('#Reset').click(function (e) {
     location.reload();
-})
+});
 
 $('#AddToDrugList').click(function (e) {
     //Prevent refresh

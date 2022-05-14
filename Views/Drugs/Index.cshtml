@@ -4,7 +4,7 @@
     ViewData["Title"] = "AntiPsych Ready Reckoner";
 }
 
-<h1>Drug List</h1>
+<h1 id="drugTop">Drug List</h1>
 
 <div class="container" style="overflow:auto;">
     <div class="mb-3 pt-1">
@@ -27,7 +27,7 @@
                     <span style="font-weight:bold;font-size:x-large;">  @Html.DisplayNameFor(model => model.DrugMaxDose)</span>
                 </th>
                 <th>
-                    <p>Options</p>
+                    <p style="font-weight:bold;font-size:x-large;">Options</p>
                 </th>
             </tr>
         </thead>
@@ -57,5 +57,6 @@
     </table>
     <div class="mb-3 pt-1">
         <a asp-action="Create" class="btn btn-success">Create New Drug</a>
+        <button id="scroll" class="btn btn-outline-secondary">Scroll to top</button>
     </div>
 </div>
