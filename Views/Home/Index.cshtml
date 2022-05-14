@@ -1,19 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="text-center container" style="display:grid;">
-    <a asp-action="Index" asp-controller="Drugs" class="btn btn-primary btn-lg mx-auto">Go to Drug Database</a>
-</div>
+
 <div class="container">
-    <hr />
-    <h4>Drug List</h4>
+    <h4>Ready Reckoner</h4>
     <p>Please select a drug, enter a dose and add it to the dose checker below.</p>
     <p>
         <small>
             The drug data is from <b>POMH-UK's Antipsychotic Dosage Ready Reckoner - version 9.1 July 2021</b>.
-            You are responsible for ensuring this is up to date and that the results are accurate.
+            You are responsible for ensuring this is up to date and that the results are accurate. You can edit this app's drugs here:
+
         </small>
+          <a asp-action="Index" asp-controller="Drugs" class="btn btn-primary btn-sm mx-auto">Go to Drug Database</a>
     </p>
+
 </div>
 <form>
     <label class="form-label" for="drugSelect">Select a drug: </label>

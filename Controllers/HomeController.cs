@@ -30,7 +30,7 @@ namespace AntiPsychRRMVC.Controllers
                    .Include(f => f.DrugFrequency)
                    .Include(d => d.DrugMaxDose)
                    .Include(r => r.DrugRoute)
-                   .AsNoTracking().ToListAsync();
+                   .AsNoTracking().OrderBy(o => o.DrugName.Trim()).ToListAsync();
 
                 return Json(drugs);
 

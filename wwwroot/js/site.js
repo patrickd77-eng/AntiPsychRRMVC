@@ -39,6 +39,7 @@ function populateDrugSelectList() {
                     drugName + " " +
                     drugRoute + " " +
                     drugFrequency + " " +
+                    "Max Dose: " +
                     drugMaximumDose +
                     "</option>"
                 //Delete 'loading' message from select.
