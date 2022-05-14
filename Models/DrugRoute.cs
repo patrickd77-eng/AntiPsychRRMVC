@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AntiPsychRRMVC2.Models
+namespace AntiPsychRRMVC.Models
 {
     public class DrugRoute
     {
@@ -14,5 +14,6 @@ namespace AntiPsychRRMVC2.Models
         public string RouteName { get; set; }
         [ForeignKey("DrugId")]
         public int DrugId { get; set; }
+       
     }
 }

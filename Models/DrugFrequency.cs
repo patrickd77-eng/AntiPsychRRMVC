@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AntiPsychRRMVC2.Models
+namespace AntiPsychRRMVC.Models
 {
     public class DrugFrequency
     {

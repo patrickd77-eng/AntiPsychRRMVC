@@ -21,6 +21,23 @@ namespace AntiPsychRRMVC.Controllers
         {
             return View();
         }
+
+        //public async Task<IActionResult> GetDrugTypeFrequencies(decimal dose, string route)
+        //{
+
+        //    try
+        //    {
+
+        //       // getFrequenciesFromDatabase();
+
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest(e);
+        //    }
+        //}
+
         [ResponseCache(Duration = 3, Location = ResponseCacheLocation.Client, NoStore = false)]
         public async Task<IActionResult> GetDrugList()
         {

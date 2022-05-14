@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using AntiPsychRRMVC2.Models;
+using AntiPsychRRMVC.Models;
 
 namespace AntiPsychRRMVC.Data
 {
@@ -15,7 +15,7 @@ namespace AntiPsychRRMVC.Data
         {
         }
 
-        public DbSet<AntiPsychRRMVC2.Models.Drug> Drug { get; set; }
+        public DbSet<AntiPsychRRMVC.Models.Drug> Drug { get; set; }
        
     }
 }

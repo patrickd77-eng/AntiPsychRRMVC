@@ -13,6 +13,25 @@ function updateFooterCopyrightDate() {
     $("#currentDate").html(today.getFullYear());
 }
 
+function populateFrequencyList() {
+
+    var url = "/Home/GetDrugTypeFrequencies",
+        drugId = $('#drugSelect').val(),
+        drugRoute = $('#drugSelect :selected').attr("drugroute"),
+        dose = $('#dose').val();
+
+    $.ajax({
+        url: url, async: true, data: { //Passing data
+            dose: dose,
+            route: drugRoute
+        }, success: function (result) {
+
+
+        }
+    });
+
+}
+
 function populateDrugSelectList() {
     //Variables for building request.
     var url = "/Home/GetDrugList";
@@ -25,8 +44,8 @@ function populateDrugSelectList() {
                 var drugId = data.drugId,
                     drugName = data.drugName,
                     drugFrequency = data.drugFrequency.frequencyDetails,
-                    drugRoute = data.drugRoute.routeName,
-                    drugMaximumDose = data.drugMaxDose.maximumDoseLimit;
+                    drugRoute = data.drugRoute.routeName
+                // drugMaximumDose = data.drugMaxDose.maximumDoseLimit;
 
                 //Create HTML string for option syntax
                 var drugOption =
@@ -38,9 +57,7 @@ function populateDrugSelectList() {
                     drugId + "\">" +
                     drugName + " " +
                     drugRoute + " " +
-                    drugFrequency + " " +
-                    "Max Dose: " +
-                    drugMaximumDose +
+                    drugFrequency +
                     "</option>"
                 //Delete 'loading' message from select.
                 $("#delete").remove();
