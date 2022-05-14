@@ -32,24 +32,24 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr style="text-align:center;">
-                    <td>
-                        <span style="font-size:medium;" class="mx-auto"> @Html.DisplayFor(modelItem => item.DrugName)</span>
-                    </td>
-                    <td>
-                        <span style="font-size:medium;" class="mx-auto"> @Html.DisplayFor(modelItem => item.DrugRoute.RouteName)</span>
-                    </td>
-                    <td>
-                        <span style="font-size:medium;" class="mx-auto">   @Html.DisplayFor(modelItem => item.DrugFrequency.FrequencyDetails)</span>
-                    </td>
-                    <td>
-                        <span style="font-size:medium;" class="mx-auto">  @Html.DisplayFor(modelItem => item.DrugMaxDose.MaximumDoseLimit)</span>
-                    </td>
-                    <td style="display:grid;" class="mx-auto">
-                        <a asp-action="Edit" asp-route-id="@item.DrugId" class="btn btn-outline-secondary p-3">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.DrugId" class="btn btn-outline-danger p-3 mt-3">Delete</a>
-                    </td>
-                </tr>
+                    <tr style="text-align:center;">
+                        <td>
+                            <span style="font-size:medium;" class="mx-auto"> @Html.DisplayFor(modelItem => item.DrugName)</span>
+                        </td>
+                        <td>
+                            <span style="font-size:medium;" class="mx-auto"> @Html.DisplayFor(modelItem => item.DrugRoute.RouteName)</span>
+                        </td>
+                        <td>
+                            <span style="font-size:medium;" class="mx-auto">   @Html.DisplayFor(modelItem => item.DrugFrequency.FrequencyDetails)</span>
+                        </td>
+                        <td>
+                            <span style="font-size:medium;" class="mx-auto">  @Html.DisplayFor(modelItem => item.DrugMaxDose.MaximumDoseLimit)</span>
+                        </td>
+                        <td style="display:grid;" class="mx-auto">
+                            <a asp-action="Edit" asp-route-id="@item.DrugId" class="btn btn-outline-secondary p-3">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.DrugId" class="btn btn-outline-danger p-3 mt-3">Delete</a>
+                        </td>
+                    </tr>
             }
         </tbody>
     </table>
