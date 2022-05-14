@@ -20,34 +20,16 @@ namespace AntiPsychRRMVC.Controllers
             _context = context;
         }
 
-       // GET: Drugs
+        // GET: Drugs
         public async Task<IActionResult> Index()
         {
             var drugs = await _context.Drug
-                .Include(f=>f.DrugFrequency)
-                .Include(d=>d.DrugMaxDose)
-                .Include(r=>r.DrugRoute)
-                .AsNoTracking().ToListAsync();
+                .Include(f => f.DrugFrequency)
+                .Include(d => d.DrugMaxDose)
+                .Include(r => r.DrugRoute)
+                .AsNoTracking().OrderBy(o=>o.DrugName.Trim()).ToListAsync();
 
             return View(drugs);
-        }
-
-       // GET: Drugs/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var drug = await _context.Drug
-                .FirstOrDefaultAsync(m => m.DrugId == id);
-            if (drug == null)
-            {
-                return NotFound();
-            }
-
-            return View(drug);
         }
 
         // GET: Drugs/Create
@@ -65,6 +47,11 @@ namespace AntiPsychRRMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Ensure string values are trimmed.
+                drug.DrugName.Trim();
+                drug.DrugRoute.RouteName.Trim();
+                drug.DrugFrequency.FrequencyDetails.Trim();
+
                 _context.Add(drug);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -87,7 +74,7 @@ namespace AntiPsychRRMVC.Controllers
                 .Where(i => i.DrugId == id)
                 .AsNoTracking().FirstOrDefaultAsync();
 
-         
+
             if (drug == null)
             {
                 return NotFound();
@@ -102,10 +89,6 @@ namespace AntiPsychRRMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Drug drug)
         {
-            // // // // // // // // 
-            //Bug with duplicate key TO RESOLVE
-            // // // // // // // // 
-
             if (id != drug.DrugId)
             {
                 return NotFound();
@@ -115,23 +98,32 @@ namespace AntiPsychRRMVC.Controllers
             {
                 try
                 {
-                    _context.Update(drug);
+                    //Get drug that needs updating
+                    var drugToUpdate = await _context.Drug
+                         .Include(f => f.DrugFrequency)
+                        .Include(d => d.DrugMaxDose)
+                        .Include(r => r.DrugRoute)
+                        .FirstOrDefaultAsync(d => d.DrugId == id);
+                    //Make changes
+                    drugToUpdate.DrugName = drug.DrugName;
+                    drugToUpdate.DrugFrequency.FrequencyDetails = drug.DrugFrequency.FrequencyDetails;
+                    drugToUpdate.DrugMaxDose.MaximumDoseLimit = drug.DrugMaxDose.MaximumDoseLimit;
+                    drugToUpdate.DrugRoute.RouteName = drug.DrugRoute.RouteName;
+                    //Save changes
+                    _context.Drug.Update(drugToUpdate);
                     await _context.SaveChangesAsync();
+                    //Redirect
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
-                    if (!DrugExists(drug.DrugId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Log error
+                    ModelState.AddModelError(ex.ToString(), "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(drug);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Drugs/Delete/5
@@ -143,6 +135,9 @@ namespace AntiPsychRRMVC.Controllers
             }
 
             var drug = await _context.Drug
+                .Include(f => f.DrugFrequency)
+                .Include(d => d.DrugMaxDose)
+                .Include(r => r.DrugRoute)
                 .FirstOrDefaultAsync(m => m.DrugId == id);
             if (drug == null)
             {

@@ -15,7 +15,7 @@ namespace AntiPsychRRMVC2.Models
         public DrugFrequency DrugFrequency { get; set; }
         [DisplayName("Route")]
         public DrugRoute DrugRoute { get; set; }
-        [DisplayName("Maximum Dose")]
+        [DisplayName("Max Dose")]
         public DrugMaxDose DrugMaxDose { get; set; }
     }
 }

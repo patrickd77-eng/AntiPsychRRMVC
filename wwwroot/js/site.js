@@ -59,7 +59,6 @@ $('#AddToDrugList').click(function (e) {
     //Prevent refresh
     e.preventDefault();
 
-
     //Variables for building request.
     var url = "/Home/ProcessSelectedDrug",
         drugId = $('#drugSelect').val(),

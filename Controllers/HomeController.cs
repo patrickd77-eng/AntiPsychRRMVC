@@ -21,7 +21,7 @@ namespace AntiPsychRRMVC.Controllers
         {
             return View();
         }
-        [ResponseCache(Duration = 3, Location = ResponseCacheLocation.Client, NoStore = true)]
+        [ResponseCache(Duration = 3, Location = ResponseCacheLocation.Client, NoStore = false)]
         public async Task<IActionResult> GetDrugList()
         {
             try
@@ -34,16 +34,20 @@ namespace AntiPsychRRMVC.Controllers
 
                 return Json(drugs);
 
-                
+
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest();
-                throw;
+                //Log error
+                ModelState.AddModelError(ex.ToString(), "Error. " +
+                    "Try again, and if the problem persists, " +
+                    "see your system administrator.");
+
+                return BadRequest(ex);
             }
         }
-        [ResponseCache(Duration = 3, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 3, Location = ResponseCacheLocation.None, NoStore = false)]
         public IActionResult Privacy()
         {
             return View();
@@ -53,22 +57,35 @@ namespace AntiPsychRRMVC.Controllers
         public async Task<IActionResult> ProcessSelectedDrug(int id, decimal dose)
         {
 
-            var drugMaxDose = await _context.Drug
-                   .Where(i => i.DrugId == id)
-                   .Select(d=>d.DrugMaxDose.MaximumDoseLimit)
-                   .FirstOrDefaultAsync();
-
-            var result = new
+            try
             {
-                drugMaxDose = drugMaxDose,
-                dose = dose,
-                doseUtilisation = dose / drugMaxDose * 100
-            };
+                var drugMaxDose = await _context.Drug
+                     .Where(i => i.DrugId == id)
+                     .Select(d => d.DrugMaxDose.MaximumDoseLimit)
+                     .FirstOrDefaultAsync();
 
-            return Json(result); 
+                var result = new
+                {
+                    drugMaxDose = drugMaxDose,
+                    dose = dose,
+                    doseUtilisation = dose / drugMaxDose * 100
+                };
+
+                return Json(result);
+
+            }
+            catch (Exception ex)
+            {
+                //Log error
+                ModelState.AddModelError(ex.ToString(), "Error. " +
+                    "Try again, and if the problem persists, " +
+                    "see your system administrator.");
+
+                return BadRequest(ex);
+            }
         }
 
-        [ResponseCache(Duration = 3, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 3, Location = ResponseCacheLocation.None, NoStore = false)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
